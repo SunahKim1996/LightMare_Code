@@ -7,7 +7,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject tutorialBox;
     [SerializeField] GameObject tutorialEnemy;
 
-    [SerializeField] private Camera cam;
+    //[SerializeField] private Camera cam;
 
     bool isTutorial;
 
@@ -19,7 +19,7 @@ public class Tutorial : MonoBehaviour
     void Update()
     {
         if (isTutorial)
-            PlayerHUDManager.instance.SetTutorialImage(cam, tutorialBox.transform.position, tutorialEnemy.transform.position);
+            PlayerHUDManager.instance.SetTutorialImage(Camera.main, tutorialBox.transform.position, tutorialEnemy.transform.position);
 
         if (isTutorial && Input.GetMouseButton(0))
             ToggleTutorial(false);

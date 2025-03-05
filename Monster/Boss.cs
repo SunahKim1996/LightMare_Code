@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Boss : MonsterManager
 {
@@ -61,8 +60,8 @@ public class Boss : MonsterManager
             appearWall.transform.position = newPos;
             appearWall.SetActive(true);
 
-            lightSlice.SetActive(true);
-            lightSlice.transform.position = transform.position;
+            //lightSlice.SetActive(true);
+            //lightSlice.transform.position = transform.position;
 
             GameManager.instance.isGameClear = true;
         }
@@ -70,10 +69,11 @@ public class Boss : MonsterManager
 
     protected override void Move()
     {
+        //TODO: 거리 제한 추가
         if (traceTarget == null || traceTarget.GetComponent<Player>().playerData.Hp <= 0 || !isPlayerTraceTime)
             return;
 
-        Vector3 playerPos = target.transform.position;
+        Vector3 playerPos = traceTarget.transform.position;
         Vector3 localScale = transform.localScale;
 
         Vector3 dir = Vector3.zero;

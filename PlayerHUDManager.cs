@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHUDManager : MonoBehaviour
@@ -24,6 +23,8 @@ public class PlayerHUDManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject gameClearUI;
     [SerializeField] private GameObject tutorialUI;
+    [SerializeField] private GameObject noticeText;
+    [SerializeField] private GameObject playerHUD;
 
     [Header("VirtualPad")]
     [SerializeField] private FloatingJoystick joystick;
@@ -40,7 +41,7 @@ public class PlayerHUDManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
@@ -127,13 +128,30 @@ public class PlayerHUDManager : MonoBehaviour
         else
             gameOverUI.gameObject.SetActive(true);
 
-        SceneManager.UnloadSceneAsync("UI");
+        playerHUD.SetActive(false);
     }
 
     public void EndGameOverUI()
     {
         gameClearUI.gameObject.SetActive(false);
         gameOverUI.gameObject.SetActive(false);
+
+        playerHUD.SetActive(true);
+    }
+
+    public void OnRestart()
+    {
+        GameManager.instance.Restart();
+    }
+
+    public void OnGoBackMain()
+    {
+        GameManager.instance.GoBackMain();
+    }
+
+    public void ToggleNoticeText(bool state)
+    {
+        noticeText.SetActive(state);
     }
 
     // Æ©Åä¸®¾ó ==============================================================================

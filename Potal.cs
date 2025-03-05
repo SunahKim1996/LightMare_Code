@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Potal : MonoBehaviour
 {
-    [SerializeField] private string nextMapName;
+    [SerializeField] private GameMap nextMap;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,14 +12,18 @@ public class Potal : MonoBehaviour
 
         if (player != null)
         {
-            StartCoroutine(GoNextMap(nextMapName));
-            //TODO: 플레이어 움직임 멈추게
+            PlayerHUDManager.instance.ToggleNoticeText(true);
+
+            string mapName = Enum.GetName(typeof(GameMap), nextMap);
+            StartCoroutine(GoNextMap(mapName));
         }
     }
 
-    IEnumerator GoNextMap(string nextMap)
+    IEnumerator GoNextMap(string mapName)
     {
         yield return new WaitForSeconds(2f);
-        LoadSceneManager.LoadScene(nextMap);
+
+        Player.instnace.playerData.RecentMap = (int)nextMap;
+        LoadSceneManager.LoadScene(mapName);
     }
 }

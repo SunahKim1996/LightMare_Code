@@ -8,12 +8,6 @@ public class AutoScroll : MonoBehaviour
     public float ScrollSpeed = 0.5f;
     float Target_offset;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
